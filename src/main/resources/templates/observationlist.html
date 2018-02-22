@@ -57,7 +57,7 @@
 				<th></th>
 			</tr>
 			<tr th:each="observation : ${observations}">
-				<td th:text="${#dates.format(observation.timestamp, 'dd-MMM-yyyy HH:mm')}"></td>
+				<td th:text="${#dates.format(observation.timestamp, 'dd.MM.yyyy HH:mm')}"></td>
 				<td th:text="${#numbers.formatDecimal(observation.temp,1,1,'COMMA')} + ' °C'"></td>
 				<td><a th:href="@{/delete/{id}(id=${observation.id})}">Delete</a></td>
 			</tr>
