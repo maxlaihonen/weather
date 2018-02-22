@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Observations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Weather observations</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="./1">Helsinki</a></li>
+						<li><a href="./2">Tokyo</a></li>
+						<li><a href="./3">New York City</a></li>
+						<li><a href="./4">Amsterdam</a></li>
+						<li><a href="./5">Dubai</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/add">Add new observation</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+		
+		<h1>
+			Observations for <span th:switch="${observations[0].city_id}">
+				<span th:case="'1'">Helsinki</span>
+				<span th:case="'2'">Tokyo</span>
+				<span th:case="'3'">New York City</span>
+				<span th:case="'4'">Amsterdam</span>
+				<span th:case="'5'">Dubai</span>
+			</span>
+		</h1>
+		<h3>
+			Right now: 	<span th:if="${rightnow != null}" th:text="${#numbers.formatDecimal(rightnow,1,1,'COMMA')} + ' °C'"></span>
+			<span th:if="${rightnow == null}" th:text="'No data for the last 24 hours'"></span>
+		</h3>
+		<h3>
+			Highest last 24 hours: <span th:if="${highest != null}" th:text="${#numbers.formatDecimal(highest,1,1,'COMMA')} + ' °C'"></span>
+			<span th:if="${highest == null}" th:text="'No data'"></span>
+		</h3>
+		<h3>
+			Lowest last 24 hours: <span th:if="${lowest != null}" th:text="${#numbers.formatDecimal(lowest,1,1,'COMMA')} + ' °C'"></span>
+			<span th:if="${lowest == null}" th:text="'No data '"></span>
+		</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Time</th>
+				<th>Temp</th>
+			</tr>
+			<tr th:each="observation : ${observations}">
+				<td th:text="${#dates.format(observation.timestamp, 'dd-MMM-yyyy HH:mm')}"></td>
+				<td th:text="${#numbers.formatDecimal(observation.temp,1,1,'COMMA')} + ' °C'"></td>
+			</tr>
+		</table>
+		
+		<a href="/add" class="btn btn-success">Add new</a>
+	</div>
+</body>
+</html>

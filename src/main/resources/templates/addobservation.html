@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add observation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Weather observations</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/observations/1">Helsinki</a></li>
+              <li><a href="/observations/2">Tokyo</a></li>
+              <li><a href="/observations/3">New York City</a></li>
+              <li><a href="/observations/4">Amsterdam</a></li>
+              <li><a href="/observations/5">Dubai</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/add">Add new observation</a></li>
+            </ul>
+          </div><!--nav-collapse -->
+        </div><!--container-fluid -->
+      </nav>
+      
+	<h1>Add new observation</h1>
+	<div>
+			<form th:object="${observation}" th:action="@{add}" action="#" method="post">
+		  	<label for="City">City:</label>
+			<select id="city_id" th:field="*{city_id}">
+			<option value="1">Helsinki</option>
+			<option value="2">Tokyo</option>
+			<option value="3">New York City</option>
+			<option value="4">Amsterdam</option>
+			<option value="5">Dubai</option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="temp">Temperature</label>
+			<input type="number" step="0.01" id="temp" th:field="*{temp}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div th:if="${#fields.hasErrors('temp')}" th:errors="*{temp}">Error</div>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+		</form>
+	</div><!-- form -->
+	</div><!-- container -->
+</body>
+</html>
