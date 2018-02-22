@@ -36,13 +36,18 @@ public class ObservationDAO {
 			return observations;
 		}
 		
-		public List<Observation> findByCityOrderByTemperature(int city_id) {
+		public List<Observation> findByCityOrderByTemperatureLast24h(int city_id) {
 			String sql = "select temp from observations where city_id = ? AND date >= NOW() - INTERVAL 1 DAY ORDER BY temp ASC";
 			Object[] parameters = new Object[] { city_id };
 			RowMapper<Observation> mapper = new ObservationTempMapper();
 			List<Observation> observationsasc = jdbcTemplate.query(sql, parameters, mapper);
 			return observationsasc;
 			
+		}
+		public void delete(Long id) {
+			String sql = "delete from observations where id = ?";
+			Object[] parameters = new Object[] { id };
+			jdbcTemplate.update(sql, parameters);
 		}
 
 		

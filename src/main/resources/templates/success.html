@@ -3,7 +3,7 @@
 <head>
     <title>Add observation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 <div class="container">
@@ -26,25 +26,7 @@
           </div><!--nav-collapse -->
         </div><!--container-fluid -->
       </nav>
-      
-	<h1>Add new observation</h1>
-			<form th:object="${observation}" th:action="@{add}" action="#" method="post">
-		  	<label for="City">City:</label>
-			<select id="city_id" th:field="*{city_id}">
-			<option value="1">Helsinki</option>
-			<option value="2">Tokyo</option>
-			<option value="3">New York City</option>
-			<option value="4">Amsterdam</option>
-			<option value="5">Dubai</option>
-			</select>
-			<div th:if="${#fields.hasErrors('city_id')}" th:errors="*{city_id}">Error</div>
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="temp">Temperature</label>
-			<input type="number" step="0.01" id="temp" th:field="*{temp}" />
-			<div th:if="${#fields.hasErrors('temp')}" th:errors="*{temp}">Error</div>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" class="btn btn-primary" value="Save"></input>
-		</form>
-	</div><!-- container -->
+<h5>Your weather observation was added successfully. <a href="/add">Add another?</a></h5>
+</div>
 </body>
 </html>

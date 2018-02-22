@@ -3,8 +3,7 @@
 <head>
 <title>Observations</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{/css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 	<div class="container">
@@ -31,7 +30,7 @@
 		</nav>
 		
 		<h1>
-			Observations for <span th:switch="${observations[0].city_id}">
+			Observations for <span th:switch="${cityId}">
 				<span th:case="'1'">Helsinki</span>
 				<span th:case="'2'">Tokyo</span>
 				<span th:case="'3'">New York City</span>
@@ -39,30 +38,32 @@
 				<span th:case="'5'">Dubai</span>
 			</span>
 		</h1>
-		<h3>
+		<h4>
 			Right now: 	<span th:if="${rightnow != null}" th:text="${#numbers.formatDecimal(rightnow,1,1,'COMMA')} + ' °C'"></span>
 			<span th:if="${rightnow == null}" th:text="'No data for the last 24 hours'"></span>
-		</h3>
-		<h3>
+		</h4>
+		<h4>
 			Highest last 24 hours: <span th:if="${highest != null}" th:text="${#numbers.formatDecimal(highest,1,1,'COMMA')} + ' °C'"></span>
 			<span th:if="${highest == null}" th:text="'No data'"></span>
-		</h3>
-		<h3>
+		</h4>
+		<h4>
 			Lowest last 24 hours: <span th:if="${lowest != null}" th:text="${#numbers.formatDecimal(lowest,1,1,'COMMA')} + ' °C'"></span>
 			<span th:if="${lowest == null}" th:text="'No data '"></span>
-		</h3>
+		</h4>
 		<table class="table table-striped">
 			<tr>
 				<th>Time</th>
 				<th>Temp</th>
+				<th></th>
 			</tr>
 			<tr th:each="observation : ${observations}">
 				<td th:text="${#dates.format(observation.timestamp, 'dd-MMM-yyyy HH:mm')}"></td>
 				<td th:text="${#numbers.formatDecimal(observation.temp,1,1,'COMMA')} + ' °C'"></td>
+				<td><a th:href="@{/delete/{id}(id=${observation.id})}">Delete</a></td>
 			</tr>
 		</table>
 		
-		<a href="/add" class="btn btn-success">Add new</a>
+		<a href="/add" class="btn btn-primary">Add new</a>
 	</div>
 </body>
 </html>

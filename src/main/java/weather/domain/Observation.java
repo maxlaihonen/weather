@@ -11,6 +11,8 @@ public class Observation {
 	int id;
 	
 	@NotNull
+	@Min(1)
+	@Max(5)
 	int city_id;
 	
 	@NotNull
